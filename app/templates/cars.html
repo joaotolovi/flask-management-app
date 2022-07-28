@@ -1,0 +1,76 @@
+{%extends 'base.html'%}
+{%block content%}
+        
+      <h3>Cars</h3>
+      {{name}}
+      <form action="/cars" method="post">
+        <div class="d-flex align-items-center mb-3">
+
+            <div class="form-group mr-2 mb-0">
+                <label for="owner">owner</label>
+                <select id="owner" name="owner" class="form-control">
+                    {%for owner in owners%}
+                        <option value="{{owner.name}}">{{owner.name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="form-group mr-2 mb-0">
+                <label for="color">color</label>
+                <select id="color" name="color" class="form-control">
+                    <option value="yellow">yellow</option>
+                    <option value="blue">blue</option>
+                    <option value="gray">gray</option>
+                </select>
+            </div>
+            <div class="form-group mr-2 mb-0">
+                <label for="model">model</label>
+                <select id="model" name="model" class="form-control">
+                    <option value="hatch">hatch</option>
+                    <option value="sedan">sedan</option>
+                    <option value="convertible">convertible</option>
+                </select>
+            </div>
+
+            <input type="submit" 
+          class="btn btn-primary mr-3" 
+          value="Add owner">
+        </div>
+      </form>
+
+      <div class="table-wrapper">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Owner</th>
+              <th>Color</th>
+              <th>Model</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for car in cars %}
+                <tr
+                class="task"
+                >
+                <td>{{car.id}}</td>
+                <td class="task">
+                    {{car.myowner}}
+                </td>
+                <td>{{car.color}}</td>
+                <td>{{car.model}} </td>
+                <td>
+                    <form action="/cars" method="post">
+                        <input type="hidden" name="del_id" value="{{car.id}}">
+                        <input type="submit" 
+                        class="btn btn-danger" 
+                        value="Delete">
+                    </form>
+                </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+{% endblock %}

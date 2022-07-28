@@ -1,0 +1,7 @@
+email_validator
+Flask
+Flask-Login
+Flask-SQLAlchemy
+Flask-Security
+pytest
+WTForms

@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+{%block content%}
+        
+      <h3>Owners</h3>
+      {{name}}
+      <form action="/owners" method="post">
+        <div class="d-flex align-items-center mb-3">
+          <div class="form-group mr-3 mb-0">
+            <input
+              ng-model="yourTask"
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="Name of owner"
+              name="test"
+            />
+          </div>
+          <input type="submit" 
+          class="btn btn-primary mr-3" 
+          value="Add owner">
+
+        </div>
+      </form>
+
+      <div class="table-wrapper">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Name</th>
+              <th>Cars</th>
+              <th>Avaliable</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for owner in owners %}
+            <tr class="task">
+              <td>{{owner.id}}</td>
+              <td class="task">
+                {{owner.name}} 
+              </td>
+              <td> {{owner.mycars |length}}  </td>
+              {% if owner.mycars |length >=3 %}
+                <td> No </td>
+              {% else %}
+                <td> Yes </td>
+              {% endif %}
+              <td>
+                <form action="/owners" method="post">
+                  <input type="hidden" name="del_id" value="{{owner.id}}">
+                  <input type="submit" 
+                  class="btn btn-danger" 
+                  value="Delete">
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+{% endblock %}
